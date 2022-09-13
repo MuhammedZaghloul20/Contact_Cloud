@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "294521749538",
+    "firebase_url": "https://contact-cloud-bd249-default-rtdb.firebaseio.com",
+    "project_id": "contact-cloud-bd249",
+    "storage_bucket": "contact-cloud-bd249.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294521749538:android:88d74e8584927405874a7b",
+        "android_client_info": {
+          "package_name": "org.portfolio.contactcloud"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294521749538-s9gfdlmm684ollsmm3sk1vffdj7is3vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8HXihKEXmXak6nyDWbVmEOZkfH46zMgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294521749538-s9gfdlmm684ollsmm3sk1vffdj7is3vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

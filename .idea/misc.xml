@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.133" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/drawable/raduis.xml" value="0.214" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/activity_logging.xml" value="0.152" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/activity_logging2.xml" value="0.25416666666666665" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/activity_login.xml" value="0.152" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/activity_main.xml" value="0.1897810218978102" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/activity_splash_screen.xml" value="0.1897810218978102" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/chosing_photo_source.xml" value="0.21981981981981982" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/contact_item.xml" value="0.19047619047619047" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/layout/custom_alert_dialog.xml" value="0.2" />
+        <entry key="..\:/android projects learning/ContactCloud/app/src/main/res/menu/menu.xml" value="0.2351851851851852" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

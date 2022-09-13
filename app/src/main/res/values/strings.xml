@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Contact Cloud</string>
+    <string name="adding">Add custom number</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="title_activity_logging">logging</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="email"   >\tE-Mail</string>
+    <string name="password">\tPassword</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">ADD</string>
+    <string name="choose">Choose the way</string>
+    <string name="upload">Upload Contacts</string>
+    <string name="download">Download Contacts</string>
+</resources>
