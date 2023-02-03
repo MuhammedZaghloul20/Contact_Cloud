@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:gbp="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.verification">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="40sp"
+
+        android:fontFamily="@font/bevan"
+        android:text="Verification" />
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:text="E-mail has been sent, Please verify your email.."/>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        gbp:type="folding_circles" />
+</LinearLayout>

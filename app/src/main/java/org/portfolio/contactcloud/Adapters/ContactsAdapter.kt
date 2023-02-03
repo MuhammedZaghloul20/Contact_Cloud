@@ -4,31 +4,53 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.contact_item.view.*
 import org.portfolio.contactcloud.R
+import org.portfolio.contactcloud.databinding.ContactItemBinding
 
-class ContactsAdapter(private val facelist:ArrayList<contacts>) : RecyclerView.Adapter<ContactsAdapter.MyViewHolder> (){
-   class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-       val contactImage : ImageView = itemView.findViewById(R.id.contact_image)
-       val contactName : TextView = itemView.findViewById(R.id.contact_name)
-       val contactNumber : TextView = itemView.findViewById(R.id.contact_number)
+class ContactsAdapter( var facelist:ArrayList<contacts>) : RecyclerView.Adapter<ContactsAdapter.MyViewHolder> (){
+    class MyViewHolder(itemView: ContactItemBinding): RecyclerView.ViewHolder(itemView.root){
+        val contactImage : ImageView = itemView.contactImage
+        val contactName : TextView = itemView.contactName
+        val contactNumber : TextView = itemView.contactNumber
+        val selectNumber :CheckBox =itemView.selected
+        fun Bind(currentItem:contacts){
+            contactName.text = currentItem.contactname
+            contactNumber.text = currentItem.contactNumber
+            selectNumber.isChecked=currentItem.selected
+            itemView.selected.setOnClickListener{
+                if(currentItem.selected)
+                {
+                    currentItem.selected=false
+                    selectNumber.isChecked=currentItem.selected
 
-       }
+                }
+                else
+                {
+                    currentItem.selected=true
+                    selectNumber.isChecked=currentItem.selected
+                }
+            }
+        }
 
-override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
- val itemView = LayoutInflater.from(parent.context).inflate(R.layout.contact_item , parent,false)
-    return MyViewHolder(itemView)
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val itemView = LayoutInflater.from(parent.context)
+        val binding=ContactItemBinding.inflate(itemView , parent,false)
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = facelist[position]
-        holder.contactName.text = currentItem.contactname
-        holder.contactNumber.text = currentItem.contactNumber
-        //holder.contactImage.setImageDrawable(currentItem.image)
-               }
+        holder.Bind(currentItem)
+    }
 
     override fun getItemCount(): Int {
         return facelist.size
@@ -38,6 +60,10 @@ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder 
         facelist.add(contacts)
         notifyDataSetChanged()
 
+    }
+
+    fun notifyDataSetChange() {
+        notifyDataSetChanged()
     }
 
 

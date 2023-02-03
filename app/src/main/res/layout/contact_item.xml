@@ -2,10 +2,10 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="20dp"
-    android:elevation="11dp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    android:elevation="@dimen/_11sdp"
     android:orientation="vertical"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/_5sdp"
     app:cardBackgroundColor="#E1D9D1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -18,8 +18,8 @@
 
         <ImageView
             android:id="@+id/contact_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             android:src="@drawable/ic_baseline_account_circle_24"
             android:layout_gravity="center_horizontal"/>
 
@@ -33,7 +33,7 @@
                 android:id="@+id/contact_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="7dp"
+                android:layout_marginStart="@dimen/_7sdp"
                 android:alpha=".9"
                 android:text="Name"
                 android:textColor="@color/black"
@@ -41,19 +41,30 @@
 
             <TextView
                 android:id="@+id/contact_number"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:alpha=".9"
-                android:inputType="number"
-                android:text="01553972428"
+                android:text="+201553972428"
                 android:textColor="@color/black"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
 
 
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:buttonTint="@drawable/check_box_color"
+            android:checked="false"
+            android:shadowColor="@color/black"
+            android:text="selected"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
     </LinearLayout>
 

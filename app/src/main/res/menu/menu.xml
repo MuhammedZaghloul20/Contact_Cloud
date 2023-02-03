@@ -5,4 +5,15 @@
     android:title="@string/adding"
     android:icon="@drawable/ic_baseline_add_24"
     app:showAsAction="always"/>
+    <item android:id="@+id/selectall"
+        android:title="@string/selectall"
+        app:showAsAction="withText|always"/>
+    <item android:id="@+id/unselectall"
+        android:visible="false"
+        android:title="@string/unselectall"
+        app:showAsAction="withText|always"/>
+    <item android:id="@+id/logout"
+        android:title="Logout"/>
+    <item android:id="@+id/change_password"
+        android:title="Change password"/>
 </menu>

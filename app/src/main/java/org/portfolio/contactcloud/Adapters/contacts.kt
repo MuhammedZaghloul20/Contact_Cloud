@@ -5,5 +5,6 @@ import android.widget.ImageView
 import org.portfolio.contactcloud.R
 
 data class contacts(
-   // val image: Int,
-    val contactname: String, val contactNumber:String)
+    val contactname: String,
+    val contactNumber:String,
+    var selected:Boolean=false)

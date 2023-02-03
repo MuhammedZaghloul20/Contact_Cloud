@@ -15,37 +15,58 @@
         android:background="#2F3133"
         android:theme="@style/Widget.AppCompat.Toolbar"
         android:title="Contact Cloud"
-        app:titleMarginTop="10dp"
+        app:titleMarginTop="@dimen/_10sdp"
         app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contacts_recyclerView"
         android:layout_width="match_parent"
         android:background="@color/white"
-
         android:layout_height="0dp"
+        android:visibility="visible"
         android:layout_weight="1" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:background="@color/white"
+        android:layout_gravity="bottom"
         android:layout_height="wrap_content">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"  />
 
         <Button
             android:id="@+id/download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_margin="@dimen/_4sdp"
+            android:layout_gravity="center"
+            android:drawableEnd="@drawable/ic_baseline_download_24"
             android:text="@string/download" />
 
         <Button
-            android:id="@+id/upload"
+            android:id="@+id/show"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
+            android:layout_margin="@dimen/_4sdp"
+            android:text="@string/show" />
+        <Button
+            android:id="@+id/upload"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_4sdp"
+            android:drawableEnd="@drawable/ic_baseline_upload_24"
             android:text="@string/upload" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"      />
+
     </LinearLayout>
 
 </LinearLayout>

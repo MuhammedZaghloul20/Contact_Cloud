@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="320dp"
+    android:layout_width="@dimen/_320sdp"
     android:layout_height="wrap_content"
     app:cardCornerRadius="0dp"
     android:layout_gravity="center"
-    android:elevation="11dp"
+    android:elevation="@dimen/_11sdp"
 
     android:orientation="vertical"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/_5sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="#E1D9D1">
 
@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/gallery"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:src="@drawable/gallery"
             android:layout_weight="1"
             android:layout_gravity="center_horizontal"/>
@@ -29,8 +29,8 @@
         <ImageView
             android:id="@+id/camera"
             android:layout_weight="1"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
 
             android:src="@drawable/camera"
             android:layout_gravity="center"/>
