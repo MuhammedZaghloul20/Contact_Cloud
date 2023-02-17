@@ -1,16 +1,13 @@
 package org.portfolio.contactcloud.Adapters
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.contact_item.view.*
-import org.portfolio.contactcloud.R
+import org.portfolio.contactcloud.dataModel.contacts
 import org.portfolio.contactcloud.databinding.ContactItemBinding
 
 class ContactsAdapter( var facelist:ArrayList<contacts>) : RecyclerView.Adapter<ContactsAdapter.MyViewHolder> (){
@@ -19,7 +16,7 @@ class ContactsAdapter( var facelist:ArrayList<contacts>) : RecyclerView.Adapter<
         val contactName : TextView = itemView.contactName
         val contactNumber : TextView = itemView.contactNumber
         val selectNumber :CheckBox =itemView.selected
-        fun Bind(currentItem:contacts){
+        fun Bind(currentItem: contacts){
             contactName.text = currentItem.contactname
             contactNumber.text = currentItem.contactNumber
             selectNumber.isChecked=currentItem.selected

@@ -1,4 +1,4 @@
-package org.portfolio.contactcloud.Adapters
+package org.portfolio.contactcloud.dataModel
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView

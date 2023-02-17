@@ -11,5 +11,7 @@
     <color name="dark">#1E2529</color>
     <color name="lightdark">#2F3133</color>
     <color name="blue">#3F51B5</color>
+    <color name="base" >#BAFFFFFF</color>
+    <color name="blue2">#1374E9</color>
 
 </resources>

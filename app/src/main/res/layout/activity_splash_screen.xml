@@ -4,19 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1D9D1"
-    android:orientation="vertical"
     tools:context=".ui.splash_screen">
-    <ImageView
-        android:id="@+id/logo"
-        android:scaleX=".7"
-        android:scaleY=".7"
-        android:translationX="1100px"
-        android:translationY="-610px"
-        android:layout_gravity="center"
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/logo"
-    />
-
+        android:layout_weight="1"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation" />
 </LinearLayout>

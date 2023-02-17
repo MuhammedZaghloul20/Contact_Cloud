@@ -18,13 +18,10 @@
         android:theme="@style/Theme.ContactCloud"
         tools:targetApi="31">
         <activity
-            android:name=".ui.verification"
+            android:name=".ui.Verification"
             android:exported="false" />
         <activity
-            android:name=".ui.ResetPassword"
-            android:exported="false" />
-        <activity
-            android:name=".ui.login"
+            android:name=".ui.Login"
             android:exported="false" />
         <activity
             android:name=".ui.SignUp"

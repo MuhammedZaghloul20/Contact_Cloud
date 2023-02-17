@@ -19,10 +19,7 @@
         android:buttonTint="@drawable/check_box_color"
         android:id="@+id/selectall"
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/contacts_recyclerView_alert"/>
+
     </LinearLayout>
 
     <ProgressBar

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1374E9"
+    tools:context=".ui.onBoarding.First">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:id="@+id/p2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_height="400dp">
+   <ImageView
+       android:id="@+id/imageView"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:src="@drawable/design"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+   <ImageView
+       android:id="@+id/imageView2"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:src="@drawable/arrow"
+       android:translationX="-100pt"
+       android:alpha="0"
+       tools:translationX="40px"
+       tools:alpha="1"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="@+id/imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+   <TextView
+       android:id="@+id/textView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="36dp"
+       android:textStyle="bold"
+       android:fontFamily="sans-serif-condensed-medium"
+       android:text="Saved Contacts"
+       android:alpha="0"
+       tools:alpha="1"
+       android:textSize="50sp"
+       android:textColor="@color/white"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.123"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/p2" />
+
+   <TextView
+       android:id="@+id/textView2"
+       android:translationX="-50pt"
+       android:alpha="0"
+       tools:alpha="1"
+       android:layout_width="294dp"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="72dp"
+       android:gravity="center"
+       android:text="Your contact will be keeped in our Cloud, and you can get it at in time"
+       android:textSize="25sp"
+       android:textColor="@color/white"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintStart_toStartOf="@+id/textView"
+       app:layout_constraintTop_toBottomOf="@+id/textView"
+       app:layout_constraintVertical_bias="0.159" />
+
+   <LinearLayout
+       android:id="@+id/next"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginEnd="35dp"
+       android:alpha="0"
+
+       android:layout_marginBottom="25dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent">
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="@string/next"
+          android:textColor="@color/white"
+          android:textSize="30sp" />
+
+      <ImageView
+          android:layout_width="50dp"
+          android:layout_height="50dp"
+          android:src="@drawable/baseline_arrow_right_alt_24" />
+   </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

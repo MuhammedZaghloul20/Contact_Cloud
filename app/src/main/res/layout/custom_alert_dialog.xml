@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_320sdp"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-        android:elevation="@dimen/_11sdp"
-
-        android:orientation="vertical"
-        android:layout_margin="@dimen/_5sdp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardBackgroundColor="#E1D9D1">
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/base"
+    android:elevation="11dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="0dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/pick_image"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:src="@drawable/ic_baseline_account_circle_24"
-                android:layout_gravity="center_horizontal"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/pick_image"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_baseline_account_circle_24" />
 
 
-
-                <EditText
-                    android:id="@+id/add_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha=".9"
-                    android:hint="Name"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:textColor="@color/black"
-                    android:textSize="25sp" />
+        <EditText
+            android:id="@+id/add_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:alpha=".9"
+            android:hint="Name"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/add_number"
@@ -49,31 +48,33 @@
             android:textSize="25sp" />
 
         <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/cancel_adding"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/cancel"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:layout_gravity="center"
-                    android:id="@+id/cancel_adding"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/add"
-                    android:layout_weight="1"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:layout_gravity="center"
-                    android:id="@+id/adding_num"/>
+                android:layout_margin="@dimen/_15sdp"
+                android:layout_weight="1"
+                android:text="@string/cancel" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/adding_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/_15sdp"
+                android:layout_weight="1"
+                android:text="@string/add" />
 
-            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>
 

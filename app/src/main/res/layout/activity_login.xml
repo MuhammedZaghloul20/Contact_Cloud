@@ -4,107 +4,174 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_marginBottom="@dimen/_50sdp"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:orientation="vertical"
-        android:layout_marginEnd="@dimen/_25sdp"
-        android:background="@drawable/edge">
+    android:id="@+id/vis"
+
+    android:orientation="vertical"
+    tools:context=".ui.Login">
+
+
         <ImageView
+            android:layout_marginTop="30dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
+            android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_50sdp"/>
+            android:src="@drawable/login" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="40sp"
+        android:fontFamily="@font/bevan"
+        android:text="Login" />
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"><com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:inputType="textEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
-            android:drawableStart="@drawable/ic_baseline_email_24"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true">
-            <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_marginTop="@dimen/_20sdp"
-                android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:drawableStart="@drawable/ic_baseline_security_24"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-        <Button
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:layout_gravity="center"
-            android:id="@+id/login"/>
-        <LinearLayout
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            app:startIconDrawable="@drawable/ic_baseline_email_24"
             android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/email"
+                android:background="@color/white"
+                android:inputType="textEmailAddress" />
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/requiredEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Required*"
+                tools:visibility="visible"
+                android:textColor="@color/red"
+                android:layout_margin="5dp"   />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            app:startIconDrawable="@drawable/ic_baseline_security_24"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/password"
+                android:background="@color/white"
+                android:inputType="textPassword" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/requiredPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Required*"
+                    android:textColor="@color/red"
+                    android:visibility="invisible"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/forget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Forget password?"
+                    android:textColor="@color/blue"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/emailWrong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:text="E-mail or password is wrong*"
+            android:layout_gravity="center"
+            android:textColor="@color/red"/>
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:padding="15dp"
+            android:background="@drawable/button_radius"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="or, login with.."
+        android:layout_gravity="center"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="10dp"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            app:cardCornerRadius="10dp"
+            android:layout_gravity="center">
+
+            <ImageView
+
+                android:id="@+id/gmailsign"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/gmail" />
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="If you have not an email you can "
                 android:textSize="17sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SignUp"
-                android:textSize="17sp"
                 android:textColor="@color/blue"
-                android:textStyle="bold"/>
+                android:textSize="17sp"
+                android:textStyle="bold" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/forget"
-            android:layout_marginTop="17dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Forget password?"
-            android:layout_gravity="center"
-            android:textSize="17sp"
-            android:textColor="@color/blue"
-            android:textStyle="bold"/>
-<LinearLayout
-    android:layout_gravity="center"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <ImageView
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_64sdp"
-        android:src="@drawable/facebook"
-        android:layout_margin="@dimen/_17sdp"
-        android:id="@+id/facebook_login"/>
-    <ImageView
-        android:layout_width="@dimen/_64sdp"
-        android:layout_height="@dimen/_64sdp"
-        android:src="@drawable/gmail"
-        android:layout_margin="@dimen/_17sdp"
-        android:id="@+id/gmail_login"/>
-</LinearLayout>
-    </LinearLayout>
+
+
+
+
 
 
 </LinearLayout>

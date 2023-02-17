@@ -6,7 +6,7 @@
     android:elevation="@dimen/_11sdp"
     android:orientation="vertical"
     android:layout_margin="@dimen/_5sdp"
-    app:cardBackgroundColor="#E1D9D1"
+    app:cardBackgroundColor="@color/base"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -46,6 +46,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="@dimen/_3sdp"
                 android:alpha=".9"
+
                 android:text="+201553972428"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
