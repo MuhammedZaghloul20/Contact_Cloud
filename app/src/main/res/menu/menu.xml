@@ -9,8 +9,5 @@
         android:title="@string/selectall"
         app:showAsAction="withText|always"/>
 
-    <item android:id="@+id/logout"
-        android:title="Logout"/>
-    <item android:id="@+id/change_password"
-        android:title="Change password"/>
+
 </menu>

@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
+import android.os.Handler
 import android.provider.ContactsContract
 import android.provider.MediaStore
 import android.text.SpannableString
@@ -19,12 +20,16 @@ import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -57,7 +62,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var job: Job
     lateinit var auth:FirebaseAuth
     lateinit var pref: GlobalSharedPreference
-
+    lateinit var toggle:ActionBarDrawerToggle
     var alertDialog: AlertDialog? = null
     private val vm: ContactsViewModel by lazy {
         ViewModelProviders.of(this).get(ContactsViewModel::class.java)
@@ -85,150 +90,212 @@ class MainActivity : AppCompatActivity() {
         builder.setCancelable(false)
         alertDialog = builder.create()
 
-        //adapting the recyclerView
 
+        //Get permission
+        checkPermission()
+
+
+        //adapting the recyclerView
         contacts_recyclerView.layoutManager = LinearLayoutManager(this)
         if (vm.contactsList.size > 0)
         {
             contacts_recyclerView.adapter = vm.adapter
         }
 
-
-        //Get permission
-        checkPermission()
-
-        //upload contacts to the array
-        show.setOnClickListener {
+        //navigation drawer toggle
+         toggle=ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
 
 
-
-            alertDialog!!.show()
-
-
-
-            job = GlobalScope.launch {
-                GetAllContacts()
-            }
-            GlobalScope.launch(Dispatchers.Main) {
-                job.join()
-                vm.contactsList.distinct()
-                contacts_recyclerView.adapter = vm.adapter
-
-            }
-
-
-        }
-
-
-        upload.setOnClickListener {
-            if(vm.contactsList.size==0)
+       // Navigation item selected
+        navi.setNavigationItemSelectedListener{
+            when(it.itemId)
             {
-                Toast.makeText(applicationContext, "there is no numbers", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                var brk = false
-                val connectivityManager =
-                    getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-                val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
-                val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+                R.id.showCon-> {
+                    alertDialog!!.show()
+                    job = GlobalScope.launch {
+                        GetAllContacts()
+                    }
+                    GlobalScope.launch(Dispatchers.Main) {
+                        job.join()
+                        vm.contactsList.distinct()
+                        contacts_recyclerView.adapter = vm.adapter
 
-                if (!isConnected) {
-                    Toast.makeText(
-                        applicationContext,
-                        "the upload process requires internet connection",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    alertDialog?.show()
-                    for (i in vm.contactsList) {
-                        if (i.selected)
-                            myRef.child(i.contactNumber).setValue(i.contactname).addOnCompleteListener{
-                                if(it.isSuccessful)
-                                {
-                                    vm.contactsList.remove(i)
-                                    contacts_recyclerView.adapter = vm.adapter
+                    }
+                }
+                R.id.writeCon->{
+                    val snack = Snackbar.make(snack,"Note that only selected numbers will be saved",Snackbar.LENGTH_LONG)
+                    snack.show()
+                    Handler().postDelayed({
+                        var alertuilder=AlertDialog.Builder(this)
+                        alertuilder.setTitle("Write Permission").setMessage("Are you sure that you want to save the contacts in you phone?").setNegativeButton("No"){dialog,which->
+                            dialog.dismiss()
 
-                                }
-                                else
-                                {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "the contact ${i.contactname} and the contacts after it has 'not' be uploaded",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    alertDialog?.dismiss()
-                                    brk = true
+                        }.setPositiveButton("Yes"){dialog,which->
+                            WriteContacts(vm.contactsList)
+                            dialog.dismiss()
+
+                        }
+                        var dialog=alertuilder.create()
+                        dialog.show()
+                    },3000)
+                }
+                R.id.uploadCon->{
+                    if(vm.contactsList.size==0)
+                    {
+                        Toast.makeText(applicationContext, "there is no numbers", Toast.LENGTH_SHORT).show()
+                    }
+                    else {
+                        var brk = false
+                        val connectivityManager =
+                            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                        val activeNetwork: NetworkInfo? = connectivityManager.activeNetworkInfo
+                        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+                        if (!isConnected) {
+                            Toast.makeText(
+                                applicationContext,
+                                "the upload process requires internet connection",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            alertDialog?.show()
+                            for (i in vm.contactsList) {
+                                if (i.selected)
+                                    myRef.child(i.contactNumber).setValue(i.contactname).addOnCompleteListener{
+                                        if(it.isSuccessful)
+                                        {
+                                            vm.contactsList.remove(i)
+                                            contacts_recyclerView.adapter = vm.adapter
+
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "the contact ${i.contactname} and the contacts after it has 'not' be uploaded",
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                            alertDialog?.dismiss()
+                                            brk = true
+                                        }
+
+                                    }
+                                if (brk) {
+
+                                    break
                                 }
 
                             }
-                        if (brk) {
+                            if (!brk) {
+                                alertDialog?.dismiss()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "only selected Numbers Uploaded",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                            brk = false
 
-                            break
-                        }
-
-                    }
-                    if (!brk) {
-                        alertDialog?.dismiss()
-                        Toast.makeText(
-                            applicationContext,
-                            "only selected Numbers Uploaded",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                    brk = false
-
-                }
-            }
-        }
-        write.setOnClickListener{
-            var alertuilder=AlertDialog.Builder(this)
-            alertuilder.setTitle("Write Permission").setMessage("Are you sure that you want to save the contacts in you phone?").setNegativeButton("No"){dialog,which->
-                dialog.dismiss()
-
-            }.setPositiveButton("Yes"){dialog,which->
-                WriteContacts(vm.contactsList)
-                dialog.dismiss()
-
-            }
-            var dialog=alertuilder.create()
-            dialog.show()
-        }
-        //download contacts from firebase
-        download.setOnClickListener{
-            alertDialog!!.show()
-            vm.contactsList.clear()
-            var j:Job?=null
-            myRef.addValueEventListener(object: ValueEventListener {
-
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    val temp=ArrayList<contacts>()
-                     j=GlobalScope.launch(Dispatchers.IO) {
-                    for ( i in snapshot.children) {
-
-                        temp.add(contacts(i.value.toString(), i.key.toString()))
                         }
                     }
-                    runBlocking {
-                        j?.join()
-                        val t=temp- vm.contactsList.toSet()
-                        vm.contactsList+=t
-                        vm.adapter= ContactsAdapter(vm.contactsList)
-                        alertDialog!!.dismiss()
-                        contacts_recyclerView.adapter = vm.adapter
+                }
+                R.id.downloadCon->{
+                    alertDialog!!.show()
+                    vm.contactsList.clear()
+                    var j:Job?=null
+                    myRef.addValueEventListener(object: ValueEventListener {
+
+
+                        override fun onDataChange(snapshot: DataSnapshot) {
+                            // This method is called once with the initial value and again
+                            // whenever data at this location is updated.
+                            val temp=ArrayList<contacts>()
+                            j=GlobalScope.launch(Dispatchers.IO) {
+                                for ( i in snapshot.children) {
+
+                                    temp.add(contacts(i.value.toString(), i.key.toString()))
+                                }
+                            }
+                            runBlocking {
+                                j?.join()
+                                val t=temp- vm.contactsList.toSet()
+                                vm.contactsList+=t
+                                vm.adapter= ContactsAdapter(vm.contactsList)
+                                alertDialog!!.dismiss()
+                                contacts_recyclerView.adapter = vm.adapter
+                            }
+                        }
+                        override fun onCancelled(error: DatabaseError) {
+                            Toast.makeText(applicationContext, "something goes wrong", Toast.LENGTH_SHORT).show()
+
+                        }
+                    })
+                    alertDialog!!.dismiss()
+                }
+                R.id.logout->{
+                    auth.signOut()
+                    pref.setValue("email","none")
+                    startActivity(Intent(this@MainActivity,Login::class.java))
+                    finish()
+                }
+                R.id.change_password->{
+
+                    var alertBuilder=AlertDialog.Builder(this@MainActivity)
+                    var view=layoutInflater.inflate(R.layout.password_reset_alert,null,false)
+                    alertBuilder.setView(view).create()
+                    var baseDialog=alertBuilder.show()
+                view.confirm_change.setOnClickListener{
+
+
+                        if(isValidPass(view.password_reset.text.toString()))
+                        {
+                            if(view.password_reset.text.toString()==view.matched_password_reset.text.toString())
+                            {
+                                var alert2= AlertDialog.Builder(this)
+                                alert2.setTitle("Confirmation")
+                                alert2.setMessage("Are you sure that you will change the password ?")
+                                alert2.setCancelable(false)
+                                alert2.setPositiveButton("confirm") { dialog, which ->
+
+                                    auth.currentUser?.updatePassword(view.password_reset.text.toString())
+                                    dialog.dismiss()
+                                    baseDialog.dismiss()
+
+                                }
+                                alert2.setNegativeButton("Cancel"){dialog, which ->
+                                    dialog.dismiss()
+
+                                }
+                                alert2.create().show()
+                            }
+                            else{
+                                Toast.makeText(applicationContext, "Passwords are not matched", Toast.LENGTH_SHORT).show()
+
+                            }
+                        }
+                        else if(view.password_reset.text.toString().length<8)
+                            Toast.makeText(applicationContext, "Passwords should consist of more than 8 of both numbers and letters", Toast.LENGTH_LONG).show()
+
+                        else
+                            Toast.makeText(applicationContext, "Passwords should contain numbers and alphabet letters ", Toast.LENGTH_SHORT).show()
+
+
+
+
+                    }
+                    view.cancel_change.setOnClickListener{
+                    baseDialog.dismiss()
+                    }
                 }
             }
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(applicationContext, "something goes wrong", Toast.LENGTH_SHORT).show()
-
-                }
-            })
-            alertDialog!!.dismiss()
-
+            drawer.closeDrawer(GravityCompat.START)
+            true
         }
+
+
 
     }
 
@@ -287,39 +354,62 @@ class MainActivity : AppCompatActivity() {
 
     private fun WriteContacts(contacts: ArrayList<contacts>) {
 
-
-
         val cr = contentResolver
 
         for (contact in contacts) {
-            val ops = ArrayList<ContentProviderOperation>()
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
-                .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
-                .build())
+            if (contact.selected) {
+                vm.contactsList.remove(contact)
+                vm.adapter.notifyDataSetChange()
+                val ops = ArrayList<ContentProviderOperation>()
+                ops.add(
+                    ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
+                        .build()
+                )
 
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, contact.contactname)
-                .build())
+                ops.add(
+                    ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                        .withValue(
+                            ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE
+                        )
+                        .withValue(
+                            ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
+                            contact.contactname
+                        )
+                        .build()
+                )
 
-            ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
-                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
-                .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
-                .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, contact.contactNumber)
-                .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_HOME)
-                .build())
+                ops.add(
+                    ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                        .withValue(
+                            ContactsContract.Data.MIMETYPE,
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE
+                        )
+                        .withValue(
+                            ContactsContract.CommonDataKinds.Phone.NUMBER,
+                            contact.contactNumber
+                        )
+                        .withValue(
+                            ContactsContract.CommonDataKinds.Phone.TYPE,
+                            ContactsContract.CommonDataKinds.Phone.TYPE_HOME
+                        )
+                        .build()
+                )
 
-            try {
-                cr.applyBatch(ContactsContract.AUTHORITY, ops)
-            } catch (e: Exception) {
-                e.printStackTrace()
+                try {
+                    cr.applyBatch(ContactsContract.AUTHORITY, ops)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
             }
         }
 
     }
-
     //Menu inflation
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
@@ -334,6 +424,7 @@ class MainActivity : AppCompatActivity() {
 
     //menu item actions
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
             R.id.add -> {
 
@@ -446,63 +537,7 @@ class MainActivity : AppCompatActivity() {
 
 
             }
-            R.id.logout->
-            {
-                //var log=login()
-                auth.signOut()
-                pref.setValue("email","none")
-                startActivity(Intent(this@MainActivity,Login::class.java))
-                finish()
 
-            }
-            R.id.change_password->{
-                var alertBuilder=AlertDialog.Builder(this@MainActivity)
-                var view=layoutInflater.inflate(R.layout.password_reset_alert,null,false)
-                alertBuilder.setView(view).create()
-                var baseDialog=alertBuilder.show()
-            view.confirm_change.setOnClickListener{
-
-
-                    if(isValidPass(view.password_reset.text.toString()))
-                    {
-                        if(view.password_reset.text.toString()==view.matched_password_reset.text.toString())
-                        {
-                            var alert2= AlertDialog.Builder(this)
-                            alert2.setTitle("Confirmation")
-                            alert2.setMessage("Are you sure that you will change the password ?")
-                            alert2.setCancelable(false)
-                            alert2.setPositiveButton("confirm") { dialog, which ->
-
-                                auth.currentUser?.updatePassword(view.password_reset.text.toString())
-                                dialog.dismiss()
-                                baseDialog.dismiss()
-
-                            }
-                            alert2.setNegativeButton("Cancel"){dialog, which ->
-                                dialog.dismiss()
-
-                            }
-                            alert2.create().show()
-                        }
-                        else{
-                            Toast.makeText(applicationContext, "Passwords are not matched", Toast.LENGTH_SHORT).show()
-
-                        }
-                    }
-                    else if(view.password_reset.text.toString().length<8)
-                        Toast.makeText(applicationContext, "Passwords should consist of more than 8 of both numbers and letters", Toast.LENGTH_LONG).show()
-
-                    else
-                        Toast.makeText(applicationContext, "Passwords should contain numbers and alphabet letters ", Toast.LENGTH_SHORT).show()
-
-
-
-
-                }
-                view.cancel_change.setOnClickListener{
-                baseDialog.dismiss()
-                }
-            }
 
         }
 
@@ -567,6 +602,14 @@ class MainActivity : AppCompatActivity() {
         return true
 
     }
+
+    override fun onBackPressed() {
+        if(drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START)
+        else
+        super.onBackPressed()
+    }
+
 
 
 }

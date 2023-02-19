@@ -21,8 +21,12 @@ class First() : Fragment() {
         val view= inflater.inflate(R.layout.fragment_first, container, false)
 
         view.imageView2.animate().translationX(-40f).alpha(1f).duration=1000
+
+
         view.textView.animate().alpha(1f).duration=1500
-        view.textView2.animate().translationX(-20f).alpha(1f).duration=2000
+
+
+        view.textView2.animate().translationX(180f).alpha(1f).duration=2000
         view.next.setOnClickListener{
             val viewPager=activity?.findViewById<ViewPager2>(R.id.viewPager)
             viewPager?.setCurrentItem(1,true)
